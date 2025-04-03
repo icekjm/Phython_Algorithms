@@ -1,18 +1,21 @@
+#실제 작성한코드
 def solution(a, b, n):
     answer = 0
+    numCoke = 0
     
     while n // a > 0:
-        if n % a == 0:
-            answer += n // a
+        numCoke = (n // a) * b
+        answer += numCoke
+        if n % a == 0:   
+            n = numCoke
         else:
-            answer += (n // a)
-            n = (n // a) + (n % a)
+            n = (n // a) * b + (n % a)
     
     return answer
 
-a, b = 2, 1
-n = 20
-# a, b = 3, 1
+# a, b = 2, 1
 # n = 20
+a, b = 3, 1
+n = 20
 answer = solution(a,b,n)
 print(answer)
