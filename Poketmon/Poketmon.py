@@ -1,5 +1,6 @@
 from itertools import groupby
 
+#실제 작성한 코드
 def solution(nums):
     answer = 0
     keyArr = []
@@ -19,9 +20,17 @@ def solution(nums):
     
     return answer
 
-# nums = [3,1,2,3]
-nums = [3,3,3,2,2,4]
+nums = [3,1,2,3]
+# nums = [3,3,3,2,2,4]
 # nums = [3,3,3,2,2,2]
 
-answer = solution(nums)
+#개선된 코드
+def solution2(nums):
+    answer = 0
+    
+    answer = min(len(nums) // 2, len(set(nums)))
+    
+    return answer
+
+answer = solution2(nums)
 print(answer)
