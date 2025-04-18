@@ -20,8 +20,17 @@ def solution(a, b):
     
     return answer
 
+#코드개선
+def solution2(a, b):
+    answer = ''
+    
+    dayArr = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+    answer = dayArr[datetime.date(2016, a, b).weekday()]
+    
+    return answer
+
 a = 5
 b = 24
 
-answer = solution(a, b)
+answer = solution2(a, b)
 print(answer)
