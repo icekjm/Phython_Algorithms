@@ -1,5 +1,7 @@
 
 #실제 작성한 코드1(시간초과로 인한 실패)
+#실제 작성한 코드1의 실패 원인:
+#리스트가 커질수록 .extend() 자체가 느려지고 복사 비용이 누적돼서 시간 초과
 def solution(answers):
     answer = []
     rank = dict()
@@ -44,9 +46,8 @@ def solution(answers):
         
     return answer
 
-#실제 작성한 코드1의 실패 원인: 
-
 #실제작성한코드2 개정(아래 코드는 Runtime 에러)
+#.extend()는 리스트에 제자리에서 원소를 추가만 하고,아무 것도 반환하지 않음 (리턴값은 None)
 def solution2(answers):
     answer = []
     rank = dict()
@@ -90,7 +91,8 @@ def solution2(answers):
 #실제 작성한 코드2의 실패 원인:
 
 #실제작성한코드2 최종개정
-def solution2(answers):
+#리스트 곱셈(*)은 파이썬 내부에서 복사를 한번에 처리하기 때문에 .extend() 반복보다 훨씬 빠르고 안정적
+def solution3(answers):
     answer = []
     rank = dict()
     
@@ -130,10 +132,36 @@ def solution2(answers):
         
     return answer
 
-# answers = [1,2,3,4,5,2,1,2,3,4,2,5] 
-# answers = [1,2,3,4,5]
-answers = [1,3,2,4,2]
+#개선된 최종코드
+def solution4(answers):
+    answer = []
+    scoreList = []
+    
+    total = len(answers)
+    #A,B,C문제찍기방식
+    patternABC = [
+        [1,2,3,4,5], 
+        [2,1,2,3,2,4,2,5], 
+        [3,3,1,1,2,2,4,4,5,5] 
+    ]
+    
+    for eachPattern in patternABC:
+        #A,B,C 답안지 작성
+        eachAnswer = (eachPattern * ( total // len(eachPattern) + 1))[:total]
+        #A,B,C 채점
+        eachScore = sum([1 for written, correct in zip(eachAnswer, answers) if written == correct])
+        scoreList.append(eachScore)
+    
+    maxScore = max(scoreList)    
+    answer = [person + 1 for person, score in enumerate(scoreList) if maxScore == score]
+    
+    return answer
+    
 
-answer = solution2(answers)
+# answers = [1,2,3,4,5,2,1,2,3,4,2,5] 
+answers = [1,2,3,4,5]
+# answers = [1,3,2,4,2]
+
+answer = solution4(answers)
 print(answer)
 
