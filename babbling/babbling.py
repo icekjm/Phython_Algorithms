@@ -1,5 +1,6 @@
 import re
 
+#실제 작성한 코드 아님
 def solution(babbling):
     answer = 0
     pattern = re.compile(r'^(?!.*(aya|ye|woo|ma)\1)(aya|ye|woo|ma)+$')
